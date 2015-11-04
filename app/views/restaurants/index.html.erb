@@ -1,0 +1,10 @@
+<h1>Restaurants in <%= @city %></h1>
+<%= link_to "Add a restaurant", new_restaurant_path %>
+
+<hr>
+
+<%= paginate @restaurants %> 
+
+<% for restaurant in @restaurants %>
+  <h4><%= restaurant.name %></h4>
+<% end %>
