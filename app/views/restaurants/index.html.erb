@@ -3,8 +3,14 @@
 
 <hr>
 
-<%= paginate @restaurants %> 
+<h5>Choose a restaurant:</h5>
 
-<% for restaurant in @restaurants %>
-  <h4><%= restaurant.name %></h4>
-<% end %>
+<form action="/search" method="get">
+  <input type="text" list="restaurants" name="restaurant">
+    <datalist id="restaurants">
+      <% @restaurants.each do |restaurant| %>
+        <option value="<%= restaurant.name %>"></option>
+      <% end %>
+    </datalist>
+  <input type="submit">
+</form>

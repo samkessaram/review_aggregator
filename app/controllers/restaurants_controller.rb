@@ -1,29 +1,38 @@
 class RestaurantsController < ApplicationController
   def index
-    @city = params[:city]
 
-    if @city.include? ' '
-      @city.gsub!(' ','+')
-    end
+    if params[:city]
+      @city = params[:city]
 
-    page_1 = HTTParty.get('http://opentable.herokuapp.com/api/restaurants?city=' + @city + '&per_page=100')
-    num_pages = ( page_1["total_entries"] / 100 ) + ( (page_1["total_entries"] % 100) / (page_1["total_entries"] % 100) )
-    # binding.pry
-    @restaurants = []
-    count = 1
-
-    until count > num_pages
-      page = HTTParty.get('http://opentable.herokuapp.com/api/restaurants?city=' + @city + '&page=' + count.to_s + '&per_page=100')
-      page["restaurants"].each do |restaurant|
-        restaurant = Restaurant.new(name:restaurant["name"], address:restaurant["address"], price_range:restaurant["price"], city:restaurant["city"])
-        @restaurants << restaurant
+      if @city.include? ' '
+        @city.gsub!(' ','+')
       end
-      count += 1
+
+      page_1 = HTTParty.get('http://opentable.herokuapp.com/api/restaurants?city=' + @city + '&per_page=100')
+      
+      num_pages = ( page_1["total_entries"] / 100 ) + ( (page_1["total_entries"] % 100) / (page_1["total_entries"] % 100) )
+      
+      @restaurants = []
+      
+      count = 1
+      
+      @restaurants = []
+
+      until count > num_pages
+        page = HTTParty.get('http://opentable.herokuapp.com/api/restaurants?city=' + @city + '&page=' + count.to_s + '&per_page=100')
+        page["restaurants"].each do |restaurant|
+          restaurant = Restaurant.new(name:restaurant["name"], address:restaurant["address"], price_range:restaurant["price"], city:restaurant["city"])
+          @restaurants << restaurant
+        end
+        count += 1
+      end
+    else
+      redirect_to '/'
     end
-    @restaurants.sort!{|a,b| a.name <=> b.name }
+  end
 
-    @restaurants = Kaminari.paginate_array(@restaurants).page(params[:page]).per(25)
-
+  def search
+    @restaurant = params[:restaurant]
   end
 
   def show
