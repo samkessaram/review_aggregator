@@ -1,8 +1,0 @@
-<h1>Welcome</h1>
-
-<h5>Please select your city:</h5>
-<%= form_tag("/restaurants", method: "get") do %>
-  <%= select_tag(:city, options_for_select(['Toronto'])) %>
-  <%= submit_tag("Go") %>
-<% end %>
-

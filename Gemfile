@@ -4,6 +4,7 @@ gem 'httparty'
 gem 'nokogiri'
 gem 'kaminari'
 gem 'yelp', require: 'yelp'
+gem 'oauth', '~> 0.4.7'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'

@@ -1,1 +1,6 @@
-<%= link_to "Back to Restaurants", restaurants_path %>
+<h1><%= @response.businesses[0].name %></h1>
+<% i = 1 %>
+<% until i == @response.businesses.length %>
+  <h4><%= @response.businesses[i].name %></h4>
+  <% i += 1 %>
+<% end %>

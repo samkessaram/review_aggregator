@@ -17,3 +17,4 @@
 /tmp
 
 /config/environment.rb
+/config/initializers/yelp.rb

@@ -1,7 +1,5 @@
-$(document).ready(function() {
+$(function(){
 
-  $('#search-form').submit(function(event){
-    event.preventDefault();
-  })
+  $("#results").append("<h2>restaurants, bitch</h2>");
 
-};)
+});

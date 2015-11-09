@@ -1,16 +1,16 @@
-<h1>Restaurants in <%= @city %></h1>
-<%= link_to "Add a restaurant", new_restaurant_path %>
+<% if $error %>
+  <h1> <%= $error %> </h1>
+<% else %>
+  <h1>Welcome</h1>
+<% end %>
 
-<hr>
+<h5>Please select your city:</h5>
+<%= form_tag("/restaurants/new", method: "get") do %>
+  <%= select_tag(:city, options_for_select(['Toronto'])) %>
+<h5>Search for a restaurant or bar:</h5>
+  <input type="text" name="restaurant">
+  <%= submit_tag("Go") %>
+<% end %>
 
-<h5>Choose a restaurant:</h5>
-
-<form action="/search" method="get">
-  <input type="text" list="restaurants" name="restaurant">
-    <datalist id="restaurants">
-      <% @restaurants.each do |restaurant| %>
-        <option value="<%= restaurant.name %>"></option>
-      <% end %>
-    </datalist>
-  <input type="submit">
-</form>
+<div id="results">
+</div>

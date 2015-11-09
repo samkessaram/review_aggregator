@@ -1,76 +1,64 @@
 class RestaurantsController < ApplicationController
   def index
-
-    if params[:city]
-      @city = params[:city]
-
-      if @city.include? ' '
-        @city.gsub!(' ','+')
-      end
-
-      page_1 = HTTParty.get('http://opentable.herokuapp.com/api/restaurants?city=' + @city + '&per_page=100')
-      
-      num_pages = ( page_1["total_entries"] / 100 ) + ( (page_1["total_entries"] % 100) / (page_1["total_entries"] % 100) )
-      
-      @restaurants = []
-      
-      count = 1
-      
-      @restaurants = []
-
-      until count > num_pages
-        page = HTTParty.get('http://opentable.herokuapp.com/api/restaurants?city=' + @city + '&page=' + count.to_s + '&per_page=100')
-        page["restaurants"].each do |restaurant|
-          restaurant = Restaurant.new(name:restaurant["name"], address:restaurant["address"], price_range:restaurant["price"], city:restaurant["city"])
-          @restaurants << restaurant
-        end
-        count += 1
-      end
-    else
-      redirect_to '/'
+    if $error == "No Results"
+      $error = "We couldn't find a restaurant matching that name, check the spelling and try again."
     end
   end
 
-  def search
+
+
+  def reviews
     @restaurant = params[:restaurant]
   end
 
   def show
-    @restaurant = Restaurant.find(params[:id])
+    # @restaurant = Restaurant.find(params[:id])
   end
 
   def new
-    @restaurant = Restaurant.new
+    $error = nil
+
+    if params[:city]
+      @city = params[:city]
+      @response = Yelp.client.search( @city, { term: params[:restaurant], limit: 5 })
+      if @response.total == 0
+        $error = "No Results"
+        redirect_to '/'
+      end
+    else
+      redirect_to '/'
+    end
+
   end
 
   def edit
-    @restaurant = Restaurant.find(params[:id])
+    # @restaurant = Restaurant.find(params[:id])
   end
 
   def create
-    @restaurant = Restaurant.new(restaurant_params)
+    # @restaurant = Restaurant.new(restaurant_params)
 
-    if @restaurant.save
-      redirect_to restaurants_path
-    else
-      render :new
-    end
+    # if @restaurant.save
+    #   redirect_to restaurants_path
+    # else
+    #   render :new
+    # end
   end
 
   def update
-    @restaurant = Restaurant.find(params[:id])
+    # @restaurant = Restaurant.find(params[:id])
 
-    if @restaurant.update_attributes(restaurant_params)
-      redirect_to restaurant_path(@restaurant)
-    else
-      render :edit
-    end
+    # if @restaurant.update_attributes(restaurant_params)
+    #   redirect_to restaurant_path(@restaurant)
+    # else
+    #   render :edit
+    # end
   end
 
   def destroy
-    @restaurant = Restaurant.find(restaurant[:id])
-    @restaurant.destroy
-    redirect_to restaurants_path
+    # @restaurant = Restaurant.find(restaurant[:id])
+    # @restaurant.destroy
+    # redirect_to restaurants_path
   end
 
   protected
