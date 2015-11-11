@@ -1,33 +1,72 @@
 class RestaurantsController < ApplicationController
+
   def index
     if $error == "No Results"
       $error = "We couldn't find a restaurant matching that name, check the spelling and try again."
     end
   end
 
-
-
   def reviews
-    @restaurant = params[:restaurant]
+    $error = nil
+    if params[:location]
+      @city = params[:location]
+      @response = Yelp.client.search( @city, { term: params[:term], limit: 5 })
+      if @response.total == 0
+        $error = "We couldn't find a restaurant matching that name, check the spelling and try again."
+        redirect_to '/'
+      end
+    end
+
+    @restaurant = Yelp.client.business(@response.businesses[0].id)
+
+    yelp_url = @restaurant.url
+    # open_table_url = "http://www.opentable.com/bent"
+    headers = {
+          # "ACCEPT"=>"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+          # "ACCEPT_ENCODING" => "gzip, deflate, sdch",
+          # "ACCEPT_LANGUAGE" => "en-US,en;q=0.8",
+          # "CONNECTION" => "keep-alive",
+          # "HOST"=>"http://www.yelp.com/",
+          # "UPGRADE_INSECURE_REQUESTS"=>"1",
+          # "USER_AGENT" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.80 Safari/537.36"
+          }
+
+    yelp = HTTParty.get(yelp_url, :headers=> headers)
+    yelp_page = Nokogiri::HTML(yelp)
+    yelp_reviews = yelp_page.css('.review-list p').to_s.split('voting-intro voting-prompt')
+    @yelp_ratings = yelp_page.css('div.review--with-sidebar div.review-content i.star-img').to_s.split("title=\"")
+
+    @yelp_ratings.map! do |rating| 
+      if rating.include?(" star rating")
+        rating.split(" star rating")[0]
+      end
+    end
+
+    @yelp_ratings.compact!
+
+    @yelp_reviews = []
+
+    yelp_reviews.map! do |review|
+      if review.include? ("en")
+        review.split("lang=\"en\">")[1].split("</p>")[0]
+      end
+    end
+
+    yelp_reviews.compact!
+    yelp_reviews.each { |x| !x.include?('<p>') ? @yelp_reviews << x.split("</p>")[0] : x = nil }
+
+
+    # open_table = HTTParty.get(open_table_url, :headers=> headers)
+    # open_table_page = Nokogiri::HTML(open_table)
+    # @open_table_reviews = open_table_page.css('#reviews-page p').to_s.split('</p>')
+    # binding.pry
   end
 
   def show
-    # @restaurant = Restaurant.find(params[:id])
+
   end
 
   def new
-    $error = nil
-
-    if params[:city]
-      @city = params[:city]
-      @response = Yelp.client.search( @city, { term: params[:restaurant], limit: 5 })
-      if @response.total == 0
-        $error = "No Results"
-        redirect_to '/'
-      end
-    else
-      redirect_to '/'
-    end
 
   end
 

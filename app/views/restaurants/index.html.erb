@@ -1,16 +1,15 @@
-<% if $error %>
-  <h1> <%= $error %> </h1>
-<% else %>
-  <h1>Welcome</h1>
-<% end %>
-
-<h5>Please select your city:</h5>
-<%= form_tag("/restaurants/new", method: "get") do %>
-  <%= select_tag(:city, options_for_select(['Toronto'])) %>
-<h5>Search for a restaurant or bar:</h5>
-  <input type="text" name="restaurant">
-  <%= submit_tag("Go") %>
-<% end %>
-
-<div id="results">
+<div id="title">
+  <% if $error %>
+    <h1> <%= $error %> </h1>
+  <% else %>
+    <h1>Find out what people have been writing about you.</h1>
+  <% end %>
 </div>
+
+<form action="/reviews" method="get" id="search">
+  <h5>Please select your city:</h5>
+  <input type="text" name="location" id="location" value="Toronto" required>
+  <h5>Type in the name of a restaurant:</h5>
+  <input type="text" name="term" id="term" required>
+  <input type="submit" value="Search">
+</form>

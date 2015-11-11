@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   resources :restaurants
 
-  get 'search', to: 'restaurants#search'
+  get 'reviews', to: 'restaurants#reviews'
 
   root 'restaurants#index'
   # The priority is based upon order of creation: first created -> highest priority.

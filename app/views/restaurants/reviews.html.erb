@@ -1,0 +1,19 @@
+  <div>
+    <h5><%= @restaurant.name %> </h5>
+    <p><%= @restaurant.location.display_address[0] %></p>
+    <p><%= @restaurant.location.display_address[1] %></p>
+    <p><%= @restaurant.location.display_address[2] %></p>
+  </div>
+
+  <div id="yelp">
+    <% for i in 0..3 %>
+      <div class="yelp-review">
+        <p><%= @yelp_ratings[i] %> out of 5.0</p>
+        <p><%= @yelp_reviews[i].html_safe %></p>
+      </div>
+    <% end %>
+  </div>
+
+  <div id="opentable">
+    <%=  %>
+  </div>
