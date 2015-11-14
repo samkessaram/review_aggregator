@@ -1,31 +1,56 @@
-  <div>
-    <h5><%= @zomato_restaurant["name"] %> </h5>
-    <h6><a href=<%= @zomato_url %>><%= @zomato_url %></a></h6>
-    <p><%= @yelp_restaurant.location.display_address[0] %>, <%= @yelp_restaurant.location.display_address[1] %>, <%= @yelp_restaurant.location.display_address[2] %></p>
-  </div>
+<div>
+  <h5><%= @zomato_restaurant["name"] %> </h5>
+  <h6><a href=<%= @zomato_url %>><%= @zomato_url %></a></h6>
+  <p><%= @yelp_restaurant.location.display_address[0] %>, <%= @yelp_restaurant.location.display_address[1] %>, <%= @yelp_restaurant.location.display_address[2] %></p>
+</div>
 
-  <div id="yelp">
-    <h1>YELP</h1>
-    <% for i in 0..2 %>
-      <div class="yelp-review">
-        <p><%= @yelp_dates[i] %> | <%= @yelp_ratings[i] %> out of 5.0</p>
-        <p><%= @yelp_reviews[i].html_safe %></p>
-      </div>
-    <% end %>
-  </div>
+<div id="yelp">
+  <h1>YELP</h1>
+  <% for i in 0..@yelp_reviews.length-1 %>
+    <div>
+      <p><%= @yelp_dates[i] %> | <%= @yelp_ratings[i] %>0 out of 5.00</p>
+      <p><%= @yelp_reviews[i].html_safe %></p>
+    </div>
+  <% end %>
+</div>
 
-  <br>
+<br>
 
-  <div id="opentable">
-    <h1>OPENTABLE</h1>
-    <% for i in 0..2 %>
-      <div class="open-table-review">
-        <p><%= @open_table_dates[i] %> | <%= @open_table_ratings[i] %> out of 5</p>
+
+<div id="opentable">
+  <h1>OPENTABLE</h1>
+  <% if @open_table_reviews %>
+    <% for i in 0..@open_table_reviews.length-1 %>
+      <div>
+        <p><%= @open_table_dates[i] %> | <%= @open_table_ratings[i] %>.00 out of 5.00</p>
         <p><%= @open_table_reviews[i].html_safe %></p>
       </div>
     <% end %>
-  </div>
+  <% else %>
+    <p> No OpenTable data for this restaurant.</p>
+  <% end %>
+</div>
 
-  <div id="zomato">
-    <h1>ZOMATO</h1>
-  </div>
+<div id="zomato">
+  <h1>ZOMATO</h1>
+  <% for i in 0..@zomato_reviews.length-1 %>
+    <div>
+      <p><%= @zomato_dates[i] %> | <%= @zomato_ratings[i] %>0 out of 5.00</p>
+      <p><%= @zomato_reviews[i].html_safe %></p>
+    </div>
+  <% end %>
+</div>
+
+<div id="bookenda">
+  <h1>BOOKENDA</h1>
+  <% if @bookenda_reviews %>
+    <% for i in 0..@bookenda_reviews.length-1 %>
+      <div>
+        <p><%= @bookenda_dates[i] %> | <%= @bookenda_ratings[i] %> out of 5.00</p>
+        <p><%= @bookenda_reviews[i].html_safe %></p>
+      </div>
+    <% end %>
+  <% else %>
+    <p> No Bookenda data for this restaurant.</p>
+  <% end %>
+</div>

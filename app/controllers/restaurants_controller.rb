@@ -58,15 +58,52 @@ class RestaurantsController < ApplicationController
 
     zomato_city_id = 89 #Toronto
     @zomato_restaurant = HTTParty.get('https://developers.zomato.com/api/v2.1/search?q=' + @yelp_restaurant.name.downcase.gsub(' ','+') + '&count=1&lat=' + @yelp_restaurant.location.coordinate.latitude.to_s + '&lon=' + @yelp_restaurant.location.coordinate.longitude.to_s, :headers => {'user_key' => @@ZOMATO_KEY})["restaurants"][0]["restaurant"]
-    @zomato_url = @zomato_restaurant["url"]
+    zomato_url = @zomato_restaurant["url"]
+    zomato = HTTParty.get(zomato_url, :headers => headers)
+    zomato_page = Nokogiri::HTML(zomato)
+    zomato_content = zomato_page.css('div.rev-text')
+    @zomato_ratings = zomato_content.to_s.split("label=\"Rated ")[1..3].map{ |rating| rating = rating[0..2]}
+    @zomato_dates = date = zomato_page.xpath("//time").to_s.split("datetime=\"")[1..3].map { |date| date = date[0..9]}
 
-    open_table_url = "http://www.opentable.com/" + @zomato_restaurant["name"].downcase.gsub(' ','-')
+
+    zomato_reviews_dirty = zomato_content.text.split("                                            ")[1..5]
+    @zomato_reviews = []
+    zomato_reviews_dirty.each do |review|
+      if (!review.include? "                    Rated") && (!review.include?("                \n                "))
+        @zomato_reviews << review
+      end
+    end
+
+    # binding.pry
+    search_name = @zomato_restaurant["name"].downcase
+    if search_name.include? ' + '
+      search_name.gsub!(' + ',' ')
+    end
+
+    if search_name.include? '&'
+      search_name.gsub!('&','and')
+    end
+
+    search_name.gsub!(' ','-')
+
+    open_table_url = "http://www.opentable.com/" + search_name
     open_table = HTTParty.get(open_table_url, :headers=> headers)
     open_table_page = Nokogiri::HTML(open_table)
-    @open_table_reviews = open_table_page.css('#reviews-page p').to_s.split('</p>')
-    @open_table_ratings = open_table_page.css('#reviews-results div.all-stars').to_s.split("title=\"")[1..3].map {|s| s = s[0].split("\" class")[0]}
-    @open_table_dates = open_table_page.css('#reviews-results div.review-meta > span').to_s.split("color-light\">")[1..3].map { |date| date.split("<")[0] }
-    # binding.pry
+    if !open_table_page.text.include? "We're sorry, but the page you requested could not be found."
+      @open_table_reviews = open_table_page.css('#reviews-page p').to_s.split('</p>')
+      @open_table_ratings = open_table_page.css('#reviews-results div.all-stars').to_s.split("title=\"")[1..3].map {|s| s = s[0].split("\" class")[0]}
+      @open_table_dates = open_table_page.css('#reviews-results div.review-meta > span').to_s.split("color-light\">")[1..3].map { |date| date.split("<")[0] }
+    end
+
+    bookenda_url = 'https://www.bookenda.com/' + search_name
+    bookenda = HTTParty.get(bookenda_url, :headers=> headers)
+    bookenda_page = Nokogiri::HTML(bookenda)
+        # binding.pry
+    if !bookenda_page.text.include? ("We're sorry, but the page you requested could not be found.")
+      @bookenda_reviews = bookenda_page.css('div#containerReview div.row p').to_s.split("itemprop=\"description\">")[1..3].map { |review| review.split("</p>")[0] }
+      @bookenda_ratings = bookenda_page.css('div#containerReview div.row div.score meta').to_s.split("itemprop=\"ratingValue\" content=\"")[1..3].map { |rating| rating = rating[0..3] }
+      @bookenda_dates = bookenda_page.css('div#containerReview div.row small').to_s.split("content=\"")[1..3].map { |date| date = date[0..9] }
+    end
   end
 
   def show
