@@ -42,6 +42,7 @@ class RestaurantsController < ApplicationController
 
     zomato_city_id = 89 #Toronto
     @zomato_restaurant = HTTParty.get('https://developers.zomato.com/api/v2.1/search?q=' + @yelp_restaurant.name.downcase.gsub(' ','+') + '&count=1&lat=' + @yelp_restaurant.location.coordinate.latitude.to_s + '&lon=' + @yelp_restaurant.location.coordinate.longitude.to_s, :headers => {'user_key' => @@ZOMATO_KEY})["restaurants"][0]["restaurant"]
+    binding.pry
     @zomato_url = @zomato_restaurant["url"]
     zomato = HTTParty.get(@zomato_url, :headers => headers)
     zomato_page = Nokogiri::HTML(zomato)

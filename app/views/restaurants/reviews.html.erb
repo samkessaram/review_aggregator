@@ -1,10 +1,10 @@
-<div>
+<div id="restaurant-info">
   <h5><%= @zomato_restaurant["name"] %> </h5>
   <p><%= @yelp_restaurant.location.display_address[0] %>, <%= @yelp_restaurant.location.display_address[1] %>, <%= @yelp_restaurant.location.display_address[2] %></p>
 </div>
 
-<div class="row">
-  <div id="yelp" class="reviews six columns">
+<div id="reviews">
+  <div id="yelp" class="review">
     <h1>YELP</h1>
     <% for i in 0..@yelp_reviews.length-1 %>
       <div>
@@ -14,7 +14,7 @@
     <% end %>
   </div>
 
-  <div id="opentable" class="reviews six columns">
+  <div id="opentable" class="review">
     <h1>OPENTABLE</h1>
     <% if @open_table_reviews %>
       <% for i in 0..@open_table_reviews.length-1 %>
@@ -27,10 +27,8 @@
       <p> No OpenTable data for this restaurant.</p>
     <% end %>
   </div>
-</div>
 
-<div class="row">
-  <div id="zomato" class="reviews six columns">
+  <div id="zomato" class="review">
     <h1>ZOMATO</h1>
     <% for i in 0..@zomato_reviews.length-1 %>
       <div>
@@ -40,7 +38,7 @@
     <% end %>
   </div>
 
-  <div id="bookenda" class="reviews six columns">
+  <div id="bookenda" class="review">
     <h1>BOOKENDA</h1>
     <% if @bookenda_reviews %>
       <% for i in 0..@bookenda_reviews.length-1 %>

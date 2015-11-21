@@ -30,6 +30,21 @@
 .morecontent span {
     display: none;
 }
+
 .morelink {
     display: block;
+}
+
+#restaurant-info {
+  float:left;
+  width:50%;
+}
+
+#reviews {
+  float: right;
+  width: 50%;
+}
+
+.container {
+  padding: 60px;
 }
