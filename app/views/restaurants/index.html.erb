@@ -1,15 +1,20 @@
 <div id="title">
+  <h1>Gen<span class="fade">erate</span></h1>
+  <h1>Agg<span class="fade">regate Reviews</span></h1>
+</div>
+
+<div id="hello" class="fade">
   <% if $error %>
-    <h1> <%= $error %> </h1>
+    <h3> <%= $error %> </h1>
   <% else %>
-    <h1>Find out what people have been writing about you.</h1>
+    <h3>Read what people have been saying about you.</h1>
   <% end %>
 </div>
 
 <form action="/reviews" method="get" id="search">
-  <h5>Please select your city:</h5>
-  <input type="text" name="location" id="location" value="Toronto" required>
-  <h5>Type in the name of a restaurant:</h5>
+<!--   <h5>Please select your city:</h5>
+  <input type="text" name="location" id="location" value="Toronto" required> -->
+  <h5>Find your restaurant:</h5>
   <input type="text" name="term" id="term" required>
-  <input type="submit" value="Search">
+  <input type="submit" class="button-primary" value="Search">
 </form>

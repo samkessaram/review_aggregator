@@ -8,27 +8,17 @@ class RestaurantsController < ApplicationController
 
   def reviews
     $error = nil
-    if params[:location]
-      @city = params[:location]
-      @response = Yelp.client.search( @city, { term: params[:term], limit: 5 })
-      if @response.total == 0
-        $error = "We couldn't find a restaurant matching that name, check the spelling and try again."
-        redirect_to '/'
-      end
+    city = "Toronto"
+    @response = Yelp.client.search( city, { term: params[:term], limit: 5 })
+    if @response.total == 0
+      $error = "We couldn't find a restaurant matching that name, check the spelling and try again."
+      redirect_to '/'
     end
 
     @yelp_restaurant = Yelp.client.business(@response.businesses[0].id)
 
     yelp_url = @yelp_restaurant.url
-    headers = {
-          # "ACCEPT"=>"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-          # "ACCEPT_ENCODING" => "gzip, deflate, sdch",
-          # "ACCEPT_LANGUAGE" => "en-US,en;q=0.8",
-          # "CONNECTION" => "keep-alive",
-          # # "HOST"=>"http://www.yelp.com/",
-          # "UPGRADE_INSECURE_REQUESTS"=>"1",
-          # "USER_AGENT" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.80 Safari/537.36"
-          }
+    headers = {}
 
     yelp = HTTParty.get(yelp_url, :headers=> headers)
     yelp_page = Nokogiri::HTML(yelp)
@@ -42,7 +32,7 @@ class RestaurantsController < ApplicationController
 
     zomato_city_id = 89 #Toronto
     @zomato_restaurant = HTTParty.get('https://developers.zomato.com/api/v2.1/search?q=' + @yelp_restaurant.name.downcase.gsub(' ','+') + '&count=1&lat=' + @yelp_restaurant.location.coordinate.latitude.to_s + '&lon=' + @yelp_restaurant.location.coordinate.longitude.to_s, :headers => {'user_key' => @@ZOMATO_KEY})["restaurants"][0]["restaurant"]
-    binding.pry
+
     @zomato_url = @zomato_restaurant["url"]
     zomato = HTTParty.get(@zomato_url, :headers => headers)
     zomato_page = Nokogiri::HTML(zomato)
