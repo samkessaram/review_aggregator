@@ -53,14 +53,39 @@
 
 .morelink {
     display: block;
+    text-align: center;
+}
+
+.more {
+  text-align: left;
+  clear:both;
 }
 
 #restaurant-info {
   float:left;
   width:50%;
+  text-align: left;
+}
+
+
+#restaurant-info h1 {
+  color: #1EAEDB;
+  margin-bottom: -10px;
+}
+
+#restaurant-info h4 {
+  margin-bottom: -10px;
 }
 
 #reviews {
   float: right;
   width: 50%;
+}
+
+.date {
+  float: left;
+}
+
+.rating {
+  float: right;
 }

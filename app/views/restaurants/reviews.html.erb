@@ -1,6 +1,8 @@
 <div id="restaurant-info">
-  <h5><%= @zomato_restaurant["name"] %> </h5>
-  <p><%= @yelp_restaurant.location.display_address[0] %>, <%= @yelp_restaurant.location.display_address[1] %>, <%= @yelp_restaurant.location.display_address[2] %></p>
+  <h1><%= @zomato_restaurant["name"] %> </h1>
+  <h4><%= @yelp_restaurant.location.display_address[0] %></h4>
+  <h4><%= @yelp_restaurant.location.display_address[1] %></h4>
+  <h4><%= @yelp_restaurant.location.display_address[2] %></h4>
 </div>
 
 <div id="reviews">
@@ -8,7 +10,7 @@
     <h1>YELP</h1>
     <% for i in 0..@yelp_reviews.length-1 %>
       <div>
-        <p><%= @yelp_dates[i] %> | <%= @yelp_ratings[i] %>0 out of 5.00</p>
+        <p class="date"><%= @yelp_dates[i] %></p> <p class="rating"> <%= @yelp_ratings[i] %>0 out of 5.00</p>
         <p class="more"><%= @yelp_reviews[i].html_safe %></p>
       </div>
     <% end %>
@@ -19,7 +21,7 @@
     <% if @open_table_reviews %>
       <% for i in 0..@open_table_reviews.length-1 %>
         <div>
-          <p><%= @open_table_dates[i] %> | <%= @open_table_ratings[i] %>.00 out of 5.00</p>
+          <p class="date"><%= @open_table_dates[i] %> </p> <p class="rating"><%= @open_table_ratings[i] %>.00 out of 5.00</p>
           <p class="more"><%= @open_table_reviews[i].html_safe %></p>
         </div>
       <% end %>
@@ -32,7 +34,7 @@
     <h1>ZOMATO</h1>
     <% for i in 0..@zomato_reviews.length-1 %>
       <div>
-        <p><%= @zomato_dates[i] %> | <%= @zomato_ratings[i] %>0 out of 5.00</p>
+        <p class="date"><%= @zomato_dates[i] %></p> <p class="rating"><%= @zomato_ratings[i] %>0 out of 5.00</p>
         <p class="more"><%= @zomato_reviews[i].html_safe %></p>         
       </div>
     <% end %>
@@ -43,7 +45,7 @@
     <% if @bookenda_reviews %>
       <% for i in 0..@bookenda_reviews.length-1 %>
         <div>
-          <p><%= @bookenda_dates[i] %> | <%= @bookenda_ratings[i] %> out of 5.00</p>
+          <p class="date"><%= @bookenda_dates[i] %></p> <p class="rating"><%= @bookenda_ratings[i] %> out of 5.00</p>
           <p class="more"><%= @bookenda_reviews[i].html_safe %></p>
         </div>
       <% end %>

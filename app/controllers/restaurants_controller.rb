@@ -65,7 +65,7 @@ class RestaurantsController < ApplicationController
     open_table_url = "http://www.opentable.com/" + search_name
     open_table = HTTParty.get(open_table_url, :headers=> headers)
     open_table_page = Nokogiri::HTML(open_table)
-    if !open_table_page.text.include? "We're sorry, but the page you requested could not be found."
+    if !open_table_page.text.include? ("We're sorry, but the page you requested could not be found." && "Oops! There was an error")
       @open_table_reviews = open_table_page.css('#reviews-page p').to_s.split('</p>')[0..2]
       # @open_table_previews = open_table_reviews.map { |review| review[0..140] }
       # @open_table_fulltext = open_table_reviews.map { |review| review[141..review.length-1] }
