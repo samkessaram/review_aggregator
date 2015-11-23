@@ -1,18 +1,15 @@
-<div id="banner"><img src="http://cdn.torontolife.com/wp-content/uploads/2015/09/toronto-restaurant-alo-04.jpg"></div>
+<div id="banner"></div>
 <div class="container">
 <div id="title">
-  <h1>Gen<span class="fade">erate</span></h1>
-  <h1>Agg<span class="fade">regate Reviews</span></h1>
+  <h1><em>Snap</em></h1>
   <% if $error %>
     <h3> <%= $error %> </h3>
   <% else %>
-    <h3 class="fade">Read what people have been saying about you.</h3>
+    <h3>See what the people are saying.</h3>
   <% end %>
 </div>
 
 <form action="/reviews" method="get" id="search">
-<!--   <h5>Please select your city:</h5>
-  <input type="text" name="location" id="location" value="Toronto" required> -->
   <h5>Find your restaurant:</h5>
   <input type="text" name="term" id="term" required>
   <input type="submit" class="button-primary" value="Search">

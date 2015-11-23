@@ -10,6 +10,21 @@ body {
 
 #title {
   text-align: left;
+  position: absolute;
+  top: 30px;
+  font-family: HelveticaNeue;
+}
+
+#title h1 {
+  font-weight: 700;
+  color: #1EAEDB;
+  font-size: 14.0rem;
+}
+
+#title h3 {
+  font-weight: 700;
+  margin: 30px 170px;
+  color: #f2f2f2;
 }
 
 #title h1:first-child {
@@ -22,6 +37,7 @@ body {
   z-index: -1;
   position: absolute;
   overflow: hidden;
+  background-image: image-url('banner1.jpg');
 }
 
 #banner img {
@@ -37,14 +53,10 @@ body {
   width: 300px;
 }
 
-.fade {
-  opacity: 0.35;
-}
-
 #search {
   display: inline-block;
   position: relative;
-  top: 200px;
+  top: 400px;
 }
 
 #results {
