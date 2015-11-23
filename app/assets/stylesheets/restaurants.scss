@@ -1,3 +1,7 @@
+body {
+  margin: 0px;
+}
+
 #hello {
   clear:both;
   position: relative;
@@ -5,12 +9,24 @@
 }
 
 #title {
-  float:left;
   text-align: left;
 }
 
 #title h1:first-child {
   margin-bottom: -10px;
+}
+
+#banner {
+  height: 350px;
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  overflow: hidden;
+}
+
+#banner img {
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
 }
 
 .container {
@@ -28,7 +44,7 @@
 #search {
   display: inline-block;
   position: relative;
-  top: 80px;
+  top: 200px;
 }
 
 #results {

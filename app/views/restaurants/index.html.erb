@@ -1,13 +1,12 @@
+<div id="banner"><img src="http://cdn.torontolife.com/wp-content/uploads/2015/09/toronto-restaurant-alo-04.jpg"></div>
+<div class="container">
 <div id="title">
   <h1>Gen<span class="fade">erate</span></h1>
   <h1>Agg<span class="fade">regate Reviews</span></h1>
-</div>
-
-<div id="hello" class="fade">
   <% if $error %>
-    <h3> <%= $error %> </h1>
+    <h3> <%= $error %> </h3>
   <% else %>
-    <h3>Read what people have been saying about you.</h1>
+    <h3 class="fade">Read what people have been saying about you.</h3>
   <% end %>
 </div>
 
@@ -18,3 +17,4 @@
   <input type="text" name="term" id="term" required>
   <input type="submit" class="button-primary" value="Search">
 </form>
+</div>
