@@ -1,58 +1,66 @@
+
+
 <div class="container">
-<div id="restaurant-info">
-  <h1><%= @zomato_restaurant["name"] %> </h1>
-  <h4><%= @yelp_restaurant.location.display_address[0] %></h4>
-  <h4><%= @yelp_restaurant.location.display_address[1] %></h4>
-  <h4><%= @yelp_restaurant.location.display_address[2] %></h4>
-</div>
 
-<div id="reviews">
-  <div id="yelp" class="review">
-    <h1>YELP</h1>
-    <% for i in 0..@yelp_reviews.length-1 %>
-      <div>
-        <p class="date"><%= @yelp_dates[i] %></p> <p class="rating"> <%= @yelp_ratings[i] %>0 out of 5.00</p>
-        <p class="more"><%= @yelp_reviews[i].html_safe %></p>
-      </div>
-    <% end %>
+  <div id="sidebar">
+
+
+  <div id="restaurant-info">
+    <h1><%= @data[:restaurant][:name] %> </h1>
+    <h4><%= @data[:restaurant][:address] %></h4>
   </div>
 
-  <div id="opentable" class="review">
-    <h1>OPENTABLE</h1>
-    <% if @open_table_reviews %>
-      <% for i in 0..@open_table_reviews.length-1 %>
+  </div>
+
+  <div id="reviews">
+    <div id="yelp" class="review">
+      <h1>YELP</h1>
+      <% for i in 0..@data[:reviews][:yelp][:ratings].length-1 %>
         <div>
-          <p class="date"><%= @open_table_dates[i] %> </p> <p class="rating"><%= @open_table_ratings[i] %>.00 out of 5.00</p>
-          <p class="more"><%= @open_table_reviews[i].html_safe %></p>
+          <p class="date"><%= @data[:reviews][:yelp][:dates][i] %></p> <p class="rating"> <%= @data[:reviews][:yelp][:ratings][i] %>0 out of 5.00</p>
+          <p class="more"><%= @data[:reviews][:yelp][:reviews][i].html_safe %></p>
         </div>
       <% end %>
-    <% else %>
-      <p> No OpenTable data for this restaurant.</p>
-    <% end %>
-  </div>
+    </div>
 
-  <div id="zomato" class="review">
-    <h1>ZOMATO</h1>
-    <% for i in 0..@zomato_reviews.length-1 %>
-      <div>
-        <p class="date"><%= @zomato_dates[i] %></p> <p class="rating"><%= @zomato_ratings[i] %>0 out of 5.00</p>
-        <p class="more"><%= @zomato_reviews[i].html_safe %></p>         
-      </div>
-    <% end %>
-  </div>
+    <div id="opentable" class="review">
+      <h1>OPENTABLE</h1>
+      <% if @data[:reviews][:opentable][:ratings] %>
+        <% for i in 0..@data[:reviews][:opentable][:ratings].length-1 %>
+          <div>
+            <p class="date"><%= @data[:reviews][:opentable][:dates][i] %> </p> <p class="rating"><%= @data[:reviews][:opentable][:ratings][i] %>.00 out of 5.00</p>
+            <p class="more"><%= @data[:reviews][:opentable][:reviews][i].html_safe %></p>
+          </div>
+        <% end %>
+      <% else %>
+        <p> No OpenTable data for this restaurant.</p>
+      <% end %>
+    </div>
 
-  <div id="bookenda" class="review">
-    <h1>BOOKENDA</h1>
-    <% if @bookenda_reviews %>
-      <% for i in 0..@bookenda_reviews.length-1 %>
+    <div id="zomato" class="review">
+      <h1>ZOMATO</h1>
+      <% for i in 0..@data[:reviews][:zomato][:ratings].length-1 %>
         <div>
-          <p class="date"><%= @bookenda_dates[i] %></p> <p class="rating"><%= @bookenda_ratings[i] %> out of 5.00</p>
-          <p class="more"><%= @bookenda_reviews[i].html_safe %></p>
+          <p class="date"><%= @data[:reviews][:zomato][:dates][i] %></p> <p class="rating"><%= @data[:reviews][:zomato][:ratings][i] %>0 out of 5.00</p>
+          <p class="more"><%= @data[:reviews][:zomato][:reviews][i].html_safe %></p>         
         </div>
       <% end %>
-    <% else %>
-      <p> No Bookenda data for this restaurant.</p>
-    <% end %>
+    </div>
+
+    <div id="bookenda" class="review">
+      <h1>BOOKENDA</h1>
+      <% if @data[:reviews][:bookenda][:ratings] %>
+        <% for i in 0..@data[:reviews][:bookenda][:ratings].length-1 %>
+          <div>
+            <p class="date"><%= @data[:reviews][:bookenda][:dates][i] %></p> <p class="rating"><%= @data[:reviews][:bookenda][:ratings][i] %> out of 5.00</p>
+            <p class="more"><%= @data[:reviews][:bookenda][:reviews][i].html_safe %></p>
+          </div>
+        <% end %>
+      <% else %>
+        <p> No Bookenda data for this restaurant.</p>
+      <% end %>
+    </div>
   </div>
-</div>
+  <div id="footer"></div>
+
 </div>

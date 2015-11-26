@@ -1,13 +1,16 @@
 <div id="banner"></div>
 <div class="container">
+
 <div id="title">
-  <h1><em>Snap</em></h1>
-  <% if $error %>
-    <h3> <%= $error %> </h3>
-  <% else %>
+  <h1><em>snap*</em></h1>
     <h3>See what the people are saying.</h3>
-  <% end %>
 </div>
+
+  <% if $error %>
+  <div id="error-message">
+    <h3> <%= $error %> </h3>
+  </div>
+  <% end %>
 
 <form action="/reviews" method="get" id="search">
   <h5>Find your restaurant:</h5>
