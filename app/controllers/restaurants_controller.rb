@@ -15,8 +15,8 @@ class RestaurantsController < ApplicationController
     if yelp_response.total == 0
       $error = "We couldn't find a restaurant matching that name, check the spelling and try again."
       redirect_to '/'
-    else
-      @data = ReviewsFinder.find_reviews(yelp_response)
+    # else
+    #   @data = ReviewsFinder.find_reviews(yelp_response)
 
     end
   end

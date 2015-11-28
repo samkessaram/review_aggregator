@@ -9,10 +9,13 @@ body {
 
 #sidebar {
   float: left;
-  width: 50%;
   height: 100%;
   background: black;
   position: absolute;
+}
+
+#content {
+  float: right;
 }
 
 #error-message {
@@ -134,7 +137,7 @@ body {
 
 #reviews {
   float: right;
-  width: 50%;
+  padding-right: 5%;
 }
 
 .date {

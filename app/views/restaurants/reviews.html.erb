@@ -1,66 +1,58 @@
+<body style="background:black">
+<div class="container" style="width:100%; background:white; margin-right:0px">
+  <div class="row">
+    <div id="sidebar" class="six columns">
+      <div id="restaurant-info">
+      <h1>WVRST </h1>
+      <h4>609 King Street W,Toronto, ON M5V 1M5,Canada</h4>
+      </div>
+    </div>
 
-
-<div class="container">
-
-  <div id="sidebar">
-
-
-  <div id="restaurant-info">
-    <h1><%= @data[:restaurant][:name] %> </h1>
-    <h4><%= @data[:restaurant][:address] %></h4>
-  </div>
-
-  </div>
-
-  <div id="reviews">
-    <div id="yelp" class="review">
-      <h1>YELP</h1>
-      <% for i in 0..@data[:reviews][:yelp][:ratings].length-1 %>
-        <div>
-          <p class="date"><%= @data[:reviews][:yelp][:dates][i] %></p> <p class="rating"> <%= @data[:reviews][:yelp][:ratings][i] %>0 out of 5.00</p>
-          <p class="more"><%= @data[:reviews][:yelp][:reviews][i].html_safe %></p>
+    <div id="reviews" class="six columns">
+        <div id="yelp" class="review">
+          <h1>YELP</h1>
+            <div>
+              <p class="date">2015-10-23</p> <p class="rating"> 4.00 out of 5.00</p>
+              <p class="more">Unique and delicious sausages, duck fat fries and plenty of beer and cider on tap. From bison to elk meat, kangaroo to venison, Wvrst has them. Mixed with spices, stuffed in natural casing and cooked to order, it's hard to go wrong with anything.<br><br>I settled for the blueberry maple bison sausage with duck fat fries and a Beaver Valley cider (approx. $22). Take a seat at one of their communal picnic tables under the strands of hanging white lights and enjoy. This set up really does provide a relaxed ambiance.<br><br>As for the bison sausage and Beaver Valley cider, excellent! The fries could of used a bit more seasoning, maybe some pepper to add a little bite to the richness of the duck fat. But other than that, I was very happy with the whole experience. Their staff was friendly and helpful, even taking the time to stop by and ask how everything was.<br><br>Worth the walk and the price.</p>
+            </div>
+            <div>
+              <p class="date">2015-10-05</p> <p class="rating"> 4.00 out of 5.00</p>
+              <p class="more">I had the Oktoberfest sausage and duck fat fries,  with the peppercorn and Parmesan sauce.   The fries and dip were very tasty !   I really enjoyed them.  The sausages was alright.   My friend got the danger sausage and it looked very good,  next time that is the one ai will go for.    <br><br>So limited menu but very tasty fries and the sausages are not bad...</p>
+            </div>
+            <div>
+              <p class="date">2015-10-01</p> <p class="rating"> 4.00 out of 5.00</p>
+              <p class="more">When you feel like eating big game meat, this is the place.<br><br>Just above Forno Cultura, another place you should try, Wvrst is the place for sausage and beer. The big game selection is what got my attention. It's the perfect place for some get together with the open space. <br><br>You first order your meat, the big game selection is really fascinating from elk, bison to the unknown meat to us all, kangaroo meat. It's not as bad as it sounds and the sausage pretty much taste interesting in its own way. For those who are not into those wild challenges, there are regular sausage or vegan. Duck fat fries is also something quite interesting. Beer taps are attached to the wall so you get to see beerfall. <br><br>Overall the place is a great place for after work get together with some sausage and beer.</p>
+            </div>
         </div>
-      <% end %>
-    </div>
 
-    <div id="opentable" class="review">
-      <h1>OPENTABLE</h1>
-      <% if @data[:reviews][:opentable][:ratings] %>
-        <% for i in 0..@data[:reviews][:opentable][:ratings].length-1 %>
-          <div>
-            <p class="date"><%= @data[:reviews][:opentable][:dates][i] %> </p> <p class="rating"><%= @data[:reviews][:opentable][:ratings][i] %>.00 out of 5.00</p>
-            <p class="more"><%= @data[:reviews][:opentable][:reviews][i].html_safe %></p>
-          </div>
-        <% end %>
-      <% else %>
-        <p> No OpenTable data for this restaurant.</p>
-      <% end %>
-    </div>
-
-    <div id="zomato" class="review">
-      <h1>ZOMATO</h1>
-      <% for i in 0..@data[:reviews][:zomato][:ratings].length-1 %>
-        <div>
-          <p class="date"><%= @data[:reviews][:zomato][:dates][i] %></p> <p class="rating"><%= @data[:reviews][:zomato][:ratings][i] %>0 out of 5.00</p>
-          <p class="more"><%= @data[:reviews][:zomato][:reviews][i].html_safe %></p>         
+        <div id="opentable" class="review">
+          <h1>OPENTABLE</h1>
+          <p> No OpenTable data for this restaurant.</p>
         </div>
-      <% end %>
-    </div>
 
-    <div id="bookenda" class="review">
-      <h1>BOOKENDA</h1>
-      <% if @data[:reviews][:bookenda][:ratings] %>
-        <% for i in 0..@data[:reviews][:bookenda][:ratings].length-1 %>
-          <div>
-            <p class="date"><%= @data[:reviews][:bookenda][:dates][i] %></p> <p class="rating"><%= @data[:reviews][:bookenda][:ratings][i] %> out of 5.00</p>
-            <p class="more"><%= @data[:reviews][:bookenda][:reviews][i].html_safe %></p>
-          </div>
-        <% end %>
-      <% else %>
-        <p> No Bookenda data for this restaurant.</p>
-      <% end %>
+        <div id="zomato" class="review">
+          <h1>ZOMATO</h1>
+            <div>
+              <p class="date">2015-10-25</p> <p class="rating">3.00 out of 5.00</p>
+              <p class="more">uthentic German sausages and Incredible Beer!. I visited WVRST with my husband for a late Sunday dinner date. It was our first time visiting, so we weren’t too sure what to expect, except they had duck fat fries and German sausages. 😀 When we arrived, because it was Sunday, the beer hall was relatively empty. We could instantly imagine how packed it would be on Friday/Saturday nights.</p>         
+            </div>
+            <div>
+              <p class="date">2015-10-14</p> <p class="rating">4.00 out of 5.00</p>
+              <p class="more">Located on the 2nd level of a complex on King Street West, WVRST is the home of a artisan German sausage joint and beer hall. Besides having an amazing beer selection, there is also a lot of different meats to choose from. 
+              WVRST has a pretty distinctive menu that mainly focuses on sausages, fries, and their dipping sauces. They also have vegan and gluten free options!
+              </p>         
+            </div>
+            <div>
+              <p class="date">2015-10-04</p> <p class="rating">4.50 out of 5.00</p>
+              <p class="more">This place is fantastic from the moment you walk in. Despite being a little confused since we were just told to go in and then weren't seated or anything, their way of doing things is pretty easy to figure out. You order first and then grab your number and sit wherever you please and wait for them to bring you your food - which is incredible. Definitely go for one of the game meats if you're feeling adventurous because they're delicious. Also, dirty duck fat fries are a must! </p>       
+            </div>
+        </div>
+
+        <div id="bookenda" class="review">
+          <h1>BOOKENDA</h1>
+          <p> No Bookenda data for this restaurant.</p>
+        </div>
     </div>
   </div>
-  <div id="footer"></div>
-
 </div>
+</body>

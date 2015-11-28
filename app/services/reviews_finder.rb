@@ -1,18 +1,5 @@
 class ReviewsFinder
 
-  def self.term
-    term = @z_restaurant["name"].downcase
-    if term.include? ' + '
-      term.gsub!(' + ',' ')
-    end
-
-    if term.include? '&'
-      term.gsub!('&','and')
-    end
-
-    term.gsub!(' ','-')
-  end
-
   def self.find_reviews(yelp_response)
 
     @yelp_result = Yelp.client.business(yelp_response.businesses[0].id)
@@ -58,6 +45,21 @@ class ReviewsFinder
     end
 
     {dates: z_dates, reviews: z_reviews, ratings: z_ratings}
+  end
+
+  def self.term
+    term = @z_restaurant["name"].downcase
+
+    case term
+    when (term.include? ' + ')
+      term.gsub!(' + ',' ')
+    when (term.include? '&')
+      term.gsub!('&','and')
+    when (term.include? ' ')
+      term.gsub!(' ','-')
+    else
+      term
+    end
   end
 
   def self.scrape_opentable
