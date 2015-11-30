@@ -50,16 +50,19 @@ class ReviewsFinder
   def self.term
     term = @z_restaurant["name"].downcase
 
-    case term
-    when (term.include? ' + ')
+    if (term.include? ' + ')
       term.gsub!(' + ',' ')
-    when (term.include? '&')
-      term.gsub!('&','and')
-    when (term.include? ' ')
-      term.gsub!(' ','-')
-    else
-      term
     end
+
+    if (term.include? '&')
+      term.gsub!('&','and')
+    end
+    
+    if (term.include? ' ')
+      term.gsub!(' ','-')
+    end
+
+    term
   end
 
   def self.scrape_opentable
@@ -70,7 +73,7 @@ class ReviewsFinder
     not_found_error = o_page.text.include? "We're sorry, but the page you requested could not be found."
 
     if !oops_error && !not_found_error
-      o_reviews = o_page.css('#reviews-page p').to_s.split('</p>')[0..2]
+      o_reviews = o_page.css('#reviews-page p').to_s.split('</p>')[0..2].map { |r| r.gsub!('<p>','')}
       o_ratings = o_page.css('#reviews-results div.all-stars').to_s.split("title=\"")[1..3].map {|s| s[0].split("\" class")[0]}
       o_dates = o_page.css('#reviews-results div.review-meta > span').to_s.split("color-light\">")[1..3].map { |date| date.split("<")[0] }
     end
@@ -93,9 +96,7 @@ class ReviewsFinder
 
   def self.restaurant_info
     name = @z_restaurant["name"]
-    address = "#{@yelp_result.location.display_address[0]},"\
-            "#{@yelp_result.location.display_address[1]},"\
-            "#{@yelp_result.location.display_address[2]}"
+    address = [@yelp_result.location.display_address[0], @yelp_result.location.display_address[1], @yelp_result.location.display_address[2]]
 
     {name: name, address: address}
   end

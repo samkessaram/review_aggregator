@@ -34,5 +34,28 @@ $(function(){
         return false;
     });
 
+    $("#yelp-link").click(function(){
+        $("html, body").animate({
+            scrollTop: $("#yelp").offset().top
+        }, 1000)
+    })
+
+    $("#zomato-link").click(function(){
+        $("html, body").animate({
+            scrollTop: $("#zomato").offset().top
+        }, 1000)
+    })
+
+    $("#bookenda-link").click(function(){
+        $("html, body").animate({
+            scrollTop: $("#bookenda").offset().top
+        }, 1000)
+    })
+
+    $("#opentable-link").click(function(){
+        $("html, body").animate({
+            scrollTop: $("#opentable").offset().top
+        }, 1000)
+    })
 
 });

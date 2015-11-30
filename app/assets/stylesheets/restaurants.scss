@@ -11,7 +11,10 @@ body {
   float: left;
   height: 100%;
   background: black;
-  position: absolute;
+  position: fixed;
+  padding: 75px;
+  text-align: center;
+  color: #666666;
 }
 
 #content {
@@ -119,12 +122,30 @@ body {
   clear:both;
 }
 
-#restaurant-info {
-  float:left;
-  width:50%;
-  text-align: left;
+#logos {
+  text-align: center;
+  display: inline-block;
+  margin-top: 30px;
 }
 
+#logos img {
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 40px;
+}
+
+#logos img:nth-child(odd) {
+  float: right;
+}
+
+#logos img:nth-child(even) {
+  float: left;
+}
+
+#restaurant-info {
+  text-align: left;
+  margin-bottom: 20px;
+}
 
 #restaurant-info h1 {
   color: #1EAEDB;
@@ -138,6 +159,15 @@ body {
 #reviews {
   float: right;
   padding-right: 5%;
+  margin-top: 50px;
+}
+
+.review {
+  text-align: center;
+}
+
+.review img {
+  display: inline-block;
 }
 
 .date {
@@ -146,4 +176,22 @@ body {
 
 .rating {
   float: right;
+}
+
+@media (max-width: 604px) {
+  #sidebar {
+    position: static;
+  }
+
+  #reviews {
+    padding-left: 5%;
+  }
+
+  #logos img:nth-child(even) {
+    float: none; 
+  }
+
+  #logos img:nth-child(odd) {
+    float: none; 
+  }
 }
