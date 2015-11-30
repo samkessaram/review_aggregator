@@ -36,24 +36,23 @@ body {
   top: 40px;
 }
 
-#title {
-  width: 100%;
-  text-align: center;
-  position: absolute;
-  top: 30px;
+#front-logos img {
+  margin-right: 25px;
 }
 
-#title h1 {
+#title {
   font-weight: 700;
   font-family: HelveticaNeue;
   font-size: 900%;
   float: left;
   color: #1EAEDB;
+  margin-top: 30px;
+  margin-bottom: 40px;
 }
 
 #blurb {
   font-weight: 700;
-  color: #f2f2f2;
+  color: #1EAEDB;
   clear:both;
 }
 
@@ -190,8 +189,6 @@ body {
   #search {
     margin-top: 50px;
   }
-
-  #blurb {
-    color: black;
-  }
 }
+
+
