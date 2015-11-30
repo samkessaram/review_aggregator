@@ -2,9 +2,16 @@
 <div class="container">
 
 <div id="title">
-  <h1><em>snap*</em></h1>
-    <h3>See what the people are saying.</h3>
+  <h1><em> oh, snap!</em></h1>
+  <h3 id="blurb">See what the people are saying.</h3>
+  <form action="/reviews" method="get" id="search">
+  <h5>Find your restaurant:</h5>
+  <input type="text" name="term" id="term" required>
+  <input type="submit" class="button-primary" value="Search">
+</form>
 </div>
+
+
 
   <% if $error %>
   <div id="error-message">
@@ -12,9 +19,5 @@
   </div>
   <% end %>
 
-<form action="/reviews" method="get" id="search">
-  <h5>Find your restaurant:</h5>
-  <input type="text" name="term" id="term" required>
-  <input type="submit" class="button-primary" value="Search">
-</form>
+
 </div>
