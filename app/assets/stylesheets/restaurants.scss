@@ -7,9 +7,15 @@ body {
   height: 100%;
   background: black;
   position: fixed;
-  padding: 75px;
+  padding: 35px;
   text-align: center;
   color: #666666;
+}
+
+#back {
+  margin-bottom: 40px;
+  color: #1EAEDB;
+  font-size: 2rem;
 }
 
 #error-message {
@@ -88,6 +94,11 @@ body {
   height:80px;
   margin-top: 80px;
   margin-bottom: 40px;
+}
+
+#front-logos {
+  width: 100%;
+  top: 500px;
 }
 
 #scroll-links h6 {

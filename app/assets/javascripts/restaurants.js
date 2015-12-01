@@ -2,8 +2,8 @@ $(function(){
 // Configure/customize these variables.
     var showChar = 375;  // How many characters are shown by default
     var ellipsestext = "...";
-    var moretext = '<i class="fa fa-angle-double-down show-text" title="View entire review"></i>';
-    var lesstext = '<i class="fa fa-angle-double-up show-text" title="Hide review"></i>';
+    var moretext = '<i class="fa fa-angle-double-down show-text" style="font-size:4rem;" title="View entire review"></i>';
+    var lesstext = '<i class="fa fa-angle-double-up show-text" style="font-size:4rem;" title="Hide review"></i>';
     
 
     $('.more').each(function() {
