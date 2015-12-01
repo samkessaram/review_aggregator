@@ -58,4 +58,9 @@ $(function(){
         }, 1000)
     })
 
+    $("#search").submit(function(){
+        $("#search").hide();
+        $("#loading").show();
+    })
+
 });

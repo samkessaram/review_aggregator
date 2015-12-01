@@ -11,14 +11,16 @@ class RestaurantsController < ApplicationController
   def reviews
     $error = nil
     city = "Toronto"
-    yelp_response = Yelp.client.search( city, { term: params[:term], category_filter: "restaurants", limit: 5 })
+    yelp_response = Yelp.client.search( city, { term: params[:restaurant], category_filter: "restaurants", limit: 5 })
     if yelp_response.total == 0
       $error = "We couldn't find a restaurant matching that name, check the spelling and try again."
       redirect_to '/'
     else
       @data = ReviewsFinder.find_reviews(yelp_response)
-
     end
+  end
+
+  def contact
   end
 
   def show

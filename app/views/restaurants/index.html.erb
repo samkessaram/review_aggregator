@@ -7,24 +7,32 @@
   <h3 id="blurb">See what the people are saying.</h3>
 
   <form action="/reviews" method="get" id="search">
-    <h5>Find your restaurant:</h5>
-    <input type="text" name="term" id="term" required>
+    <h5>Find recent reviews for your restaurant:</h5>
+    <input type="text" name="restaurant" id="restaurant" required>
     <input type="submit" class="button-primary" value="Search">
   </form>
+
+  <div id="loading">
+    <h5>Retrieving reviews...</h5>
+    <i class="fa fa-refresh fa-spin" style="font-size:60px"></i>
+  </div>
+
+  <p>With reviews from:</p>
 
   <div id="front-logos">
     <%= image_tag("yelp-invert.png", height: '40px', alt: 'yelp-logo') %>
     <%= image_tag("opentable-invert.png", height: '40px', alt: 'opentable-logo') %>
-    <%= image_tag("zomato-invert.png", height: '40px', alt: 'zomato-logo') %>
+    <%= image_tag("zomato-invert.png", height: '50px', alt: 'zomato-logo') %>
     <%= image_tag("bookenda-invert.png", height: '40px', alt: 'bookenda-logo') %>
   </div>
-
 
 <% if $error %>
   <div id="error-message">
     <h3> <%= $error %> </h3>
   </div>
 <% end %>
+
+
 
 
 </div>
