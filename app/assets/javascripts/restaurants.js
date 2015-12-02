@@ -60,9 +60,10 @@ $(function(){
     })
 
     $("#search-btn").click(function(){
-        console.log("fire");
-        $("#search").hide();
-        $("#loading").show();
+        if ($("#restaurant").val() != ""){
+            $("#search").hide();
+            $("#loading").show();   
+        }
     })
 
 });

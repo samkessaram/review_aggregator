@@ -34,9 +34,12 @@ class ReviewsFinder
     z = HTTParty.get(z_url, :headers => {})
     z_page = Nokogiri::HTML(z)
 
-    @no_zomato = z_page.text.include?("No results found")
+    z_content = z_page.css('div.rev-text')
 
-    # if !z_page.text.include?("No results found")
+    if z_content.length == 0
+      @no_zomato = true
+    else
+      @no_zomato = false
       z_content = z_page.css('div.rev-text')
       z_ratings = z_content.to_s.split("label=\"Rated ")[1..3].map{ |rating| rating[0..2]}
       z_dates = z_page.xpath("//time").to_s.split("datetime=\"")[1..3].map { |date| Chronic.parse(date[0..9]).strftime('%b %d, %Y')}
@@ -49,7 +52,7 @@ class ReviewsFinder
         else
           rating
         end
-      # end
+      end
     end
 
     {dates: z_dates, reviews: z_reviews, ratings: z_ratings, url: z_url}
