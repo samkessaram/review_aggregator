@@ -1,5 +1,28 @@
 == README
 
-Oh, Snap! is a side project I built to keep my skills fresh. At its heart it's a simple web scraper, so that means a lot of fun data manipulation with Ruby to get from the raw html to what I wanted to display to the user. Then I worked on creating a smooth user interface and getting more accustomed to CSS and JQuery/JavaScript.  
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-I got the idea for the site at an old restaurant job. I would often look up our reviews to see what people were saying (and if there was any feedback I could use to improve). It was really annoying having to click around to a bunch of different sites to get the whole overview, and I was shocked that there wasn't a service to aggregate everything. Once I started building this project and reading Terms of Use documents, I figured out why. Needless to say, I won't be commercializing this. (Please don't sue me, OpenTable.)
+Things you may want to cover:
+
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
+
+
+Please feel free to use a different markup language if you do not plan to run
+<tt>rake doc:app</tt>.

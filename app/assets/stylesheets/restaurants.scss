@@ -23,9 +23,11 @@ body {
   position: absolute;
   z-index: 12;
   top: 30px;
-  background-color: rgba(232,78,78,0.75);
+  background-color: white;
   padding: 15px;
   border-radius: 5px;
+  font-family: arial;
+  opacity: .8;
 }
 
 #loading {
@@ -97,6 +99,10 @@ body {
   display: inline-block;
 }
 
+#restaurant {
+  width: 300px;
+}
+
 #front-logos {
   width: 100%;
 }
@@ -149,8 +155,8 @@ body {
 }
 
 #restaurant-info {
-  text-align: left;
-  margin-bottom: 80px;
+  margin-bottom: 60px;
+  text-align: center;
 }
 
 #restaurant-info h1 {
@@ -160,6 +166,11 @@ body {
 
 #restaurant-info h4 {
   margin-bottom: -10px;
+}
+
+#restaurant-info div {
+  text-align: left;
+  display: inline-block;
 }
 
 #reviews {

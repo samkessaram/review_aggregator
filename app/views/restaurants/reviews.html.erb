@@ -4,21 +4,22 @@
     <a href="/"><i class="fa fa-arrow-circle-left" id="back"></i></a>
 
     <div id="restaurant-info">
-      <h1><%= @data[:restaurant][:name] %> </h1>
-      <h4><%= @data[:restaurant][:address][0] %></h4>
-      <h4><%= @data[:restaurant][:address][1] %></h4>
-      <h4><%= @data[:restaurant][:address][2] %></h4>
+      <div>
+        <h1><%= @data[:restaurant][:name] %> </h1>
+        <h4><%= @data[:restaurant][:address][0] %></h4>
+        <h4><%= @data[:restaurant][:address][1] %></h4>
+        <h4><%= @data[:restaurant][:address][2] %></h4>
+      </div>
     </div>
 
     <div id="logos">
-    <h6>Jump to reviews from:</h6>
-
-        <%= image_tag("yelp.png", height: '40px', id: 'yelp-link', alt: 'yelp-logo') %>
-        <%= image_tag("opentable.png", height: '40px', id: 'opentable-link', alt: 'opentable-logo') %>
-        <%= image_tag("zomato.png", height: '50px', id: 'zomato-link', alt: 'zomato-logo') %>
-        <%= image_tag("bookenda.png", height: '40px', id: 'bookenda-link', alt: 'bookenda-logo') %>
-
+      <h6>Jump to reviews from:</h6>
+      <%= image_tag("yelp.png", height: '40px', id: 'yelp-link', alt: 'yelp-logo') %>
+      <%= image_tag("opentable.png", height: '40px', id: 'opentable-link', alt: 'opentable-logo') %>
+      <%= image_tag("zomato.png", height: '50px', id: 'zomato-link', alt: 'zomato-logo') %>
+      <%= image_tag("bookenda.png", height: '40px', id: 'bookenda-link', alt: 'bookenda-logo') %>
     </div>
+    <small style="display:block;">Something not quite right? Send me an email at <%= mail_to "samkessaram@gmail.com" do %>samkessaram@gmail.com<% end %></small>
   </div>
 
   <div id="reviews" class="six columns">

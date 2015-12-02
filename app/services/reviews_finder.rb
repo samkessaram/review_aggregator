@@ -16,7 +16,7 @@ class ReviewsFinder
   end
 
   def self.scrape_yelp
-    y_url = @yelp_result.url + '?sort_by=date_desc'
+    y_url = @yelp_result.business.url + '?sort_by=date_desc'
     y_raw = HTTParty.get(y_url, :headers=> {})
     y_parsed = Nokogiri::HTML(y_raw)
     y_reviews = y_parsed.css('div.review-content p').to_s.split('</p>')[0..2].map { |review| review.split("ang=\"en\">")[1] }
@@ -29,14 +29,14 @@ class ReviewsFinder
 
   def self.scrape_zomato
     z_city_id = 89 #Toronto
-    @z_restaurant = HTTParty.get('https://developers.zomato.com/api/v2.1/search?q=' + @yelp_result.name.downcase.gsub(' ','+') + '&count=1&lat=' + @yelp_result.location.coordinate.latitude.to_s + '&lon=' + @yelp_result.location.coordinate.longitude.to_s, :headers => {'user_key' => @@ZOMATO_KEY})["restaurants"][0]["restaurant"]
+    @z_restaurant = HTTParty.get('https://developers.zomato.com/api/v2.1/search?q=' + @yelp_result.business.name.downcase.gsub(' ','+') + '&count=1&lat=' + @yelp_result.business.location.coordinate.latitude.to_s + '&lon=' + @yelp_result.business.location.coordinate.longitude.to_s, :headers => {'user_key' => @@ZOMATO_KEY})["restaurants"][0]["restaurant"]
     z_url = @z_restaurant["url"]
     z = HTTParty.get(z_url, :headers => {})
     z_page = Nokogiri::HTML(z)
 
     @no_zomato = z_page.text.include?("No results found")
 
-    if !z_page.text.include?("No results found")
+    # if !z_page.text.include?("No results found")
       z_content = z_page.css('div.rev-text')
       z_ratings = z_content.to_s.split("label=\"Rated ")[1..3].map{ |rating| rating[0..2]}
       z_dates = z_page.xpath("//time").to_s.split("datetime=\"")[1..3].map { |date| Chronic.parse(date[0..9]).strftime('%b %d, %Y')}
@@ -49,7 +49,7 @@ class ReviewsFinder
         else
           rating
         end
-      end
+      # end
     end
 
     {dates: z_dates, reviews: z_reviews, ratings: z_ratings, url: z_url}
@@ -69,7 +69,6 @@ class ReviewsFinder
     if (term.include? ' ')
       term.gsub!(' ','-')
     end
-
     term
   end
 
@@ -103,10 +102,15 @@ class ReviewsFinder
     b = HTTParty.get(b_url, :headers=> {})
     b_page = Nokogiri::HTML(b)
 
-    no_reviews = b_page.text.include? "No review yet for this restaurant."
+    if b_page.css('div#containerReview div.row p').length == 0
+      no_reviews = true
+    else
+      no_reviews = false
+    end 
+
     not_found_error = b_page.text.include? "We're sorry, but the page you requested could not be found."
 
-    if !no_reviews && !not_found_error
+    if !not_found_error && !no_reviews
       b_reviews = b_page.css('div#containerReview div.row p').to_s.split("itemprop=\"description\">")[1..3].map { |review| review.split("</p>")[0] }
       b_ratings = b_page.css('div#containerReview div.row div.score meta').to_s.split("itemprop=\"ratingValue\" content=\"")[1..3].map { |rating| rating[0..3] }
       b_dates = b_page.css('div#containerReview div.row small').to_s.split("content=\"")[1..3].map { |date| Chronic.parse(date[0..9]).strftime('%b %d, %Y') }
@@ -125,11 +129,11 @@ class ReviewsFinder
 
   def self.restaurant_info
     if @no_zomato
-      name = @yelp_result.name
+      name = @yelp_result.business.name
     else
       name = @z_restaurant["name"]
     end
-    address = [@yelp_result.location.display_address[0], @yelp_result.location.display_address[1], @yelp_result.location.display_address[2]]
+    address = [@yelp_result.business.location.display_address[0], @yelp_result.business.location.display_address[1], @yelp_result.business.location.display_address[2]]
 
     {name: name, address: address}
   end

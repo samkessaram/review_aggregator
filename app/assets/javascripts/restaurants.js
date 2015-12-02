@@ -1,4 +1,5 @@
 $(function(){
+    console.log("Loaded");
 // Configure/customize these variables.
     var showChar = 375;  // How many characters are shown by default
     var ellipsestext = "...";
@@ -58,7 +59,8 @@ $(function(){
         }, 1000)
     })
 
-    $("#search").submit(function(){
+    $("#search-btn").click(function(){
+        console.log("fire");
         $("#search").hide();
         $("#loading").show();
     })
