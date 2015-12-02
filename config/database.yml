@@ -84,5 +84,6 @@ test:
 production:
   <<: *default
   database: ohsnap_production
+  url: <%= ENV['DATABASE_URL'] %>
   username: ohsnap
   password: <%= ENV['OHSNAP_DATABASE_PASSWORD'] %>
