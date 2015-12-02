@@ -22,12 +22,11 @@ body {
 #error-message {
   position: absolute;
   z-index: 12;
-  top: 30px;
-  background-color: white;
+  top: 220px;
+  background-color: rgba(255,0,0,0.6);
   padding: 15px;
   border-radius: 5px;
-  font-family: arial;
-  opacity: .8;
+  color: black;
 }
 
 #loading {

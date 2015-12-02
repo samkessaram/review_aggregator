@@ -16,5 +16,5 @@
 !/log/.keep
 /tmp
 
-# /config/environment.rb
-# /config/secrets.yml
+/config/environment.rb
+/config/secrets.yml

@@ -3,8 +3,10 @@ require_relative '../services/reviews_finder'
 class RestaurantsController < ApplicationController
 
   def index
-    if $error == "No Results"
-      $error = "We couldn't find a restaurant matching that name, check the spelling and try again."
+    if $error
+      $error_message = "We couldn't find a restaurant matching that name, check the spelling and try again."
+    else
+      $error_message = nil
     end
   end
 
@@ -13,7 +15,7 @@ class RestaurantsController < ApplicationController
     city = "Toronto"
     yelp_response = Yelp.client.search( city, { term: params[:restaurant], category_filter: "restaurants,bars,cafes", limit: 5 })
     if yelp_response.total == 0
-      $error = "We couldn't find a restaurant matching that name, check the spelling and try again."
+      $error = true
       redirect_to '/'
     else
       @data = ReviewsFinder.find_reviews(yelp_response)
