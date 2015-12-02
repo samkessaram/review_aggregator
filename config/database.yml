@@ -87,4 +87,4 @@ production:
   # url: <%= ENV['DATABASE_URL'] %>
   # username: ohsnap
   # password: <%= ENV['OHSNAP_DATABASE_PASSWORD'] %>
-  # pool: 5
+  pool: 5
