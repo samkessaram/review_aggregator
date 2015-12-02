@@ -16,6 +16,5 @@
 !/log/.keep
 /tmp
 
-app/config/environment.rb
-app/config/initializers/yelp.rb
+/config/environment.rb
 /config/secrets.yml
