@@ -8,6 +8,7 @@ class RestaurantsController < ApplicationController
     else
       $error_message = nil
     end
+    $error = nil
   end
 
   def reviews
