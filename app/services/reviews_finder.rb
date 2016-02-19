@@ -82,7 +82,6 @@ class ReviewsFinder
     oops_error = o_page.text.include? "Oops! There was an error"
     not_found_error = o_page.text.include? "We're sorry, but the page you requested could not be found."
     no_reviews_error = ( o_page.css("#reviews-page").length == 0 )
-    binding.pry
     
     if !oops_error && !not_found_error && !no_reviews_error
       o_reviews = o_page.css('#reviews-page p').to_s.split('</p>')[0..2].map { |r| r.gsub!('<p>','')}
