@@ -1,6 +1,5 @@
 $(function(){
 // Configure/customize these variables.
-    console.log(new Date);
     var showChar = 375;  // How many characters are shown by default
     var ellipsestext = "...";
     var moretext = '<i class="fa fa-angle-double-down show-text" style="font-size:4rem;" title="View entire review"></i>';
@@ -61,7 +60,6 @@ $(function(){
 
     $("#search-btn").on("click",function(event){
         if ($("#restaurant").val() != ""){
-            console.log("clicked");
             $("#search").hide();
             $("#loading").show();   
         }
