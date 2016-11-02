@@ -29,19 +29,12 @@ class ReviewsFinder
   def self.scrape_zomato
     z_name = @yelp_result.business.name.downcase
 
-    case
-    when z_name.include?('lounge')
-      z_name.slice! 'lounge'
-    when z_name.include?('restaurant')
-      z_name.slice! 'restaurant'
-    when z_name.include?('bar')
-      z_name.slice! 'bar'
-    when z_name.include?('grill')
-      z_name.slice! 'grill'
-    when z_name.include?('brasserie')
-      z_name.slice! 'brasserie'
-    when z_name.include?('bistro')
-      z_name.slice! 'bistro'
+    generic_terms = ['lounge','restaurant','bar','grill','brasserie','bistro']
+
+    generic_terms.each do |term|
+      if z_name.include? term
+        z_name.slice! term
+      end
     end
 
     z_city_id = 89 #Toronto
