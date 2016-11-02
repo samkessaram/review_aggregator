@@ -6,6 +6,7 @@ gem 'kaminari'
 gem 'yelp', require: 'yelp'
 gem 'oauth', '~> 0.4.7'
 gem 'chronic'
+gem 'jquery-turbolinks'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
