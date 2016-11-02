@@ -24,25 +24,41 @@ class ReviewsFinder
     y_dates = y_parsed.css('div span.rating-qualifier').to_s.split("datePublished\" content=\"")[1..3].map { |date| Chronic.parse(date[0..9]).strftime('%b %d, %Y')}
 
     {dates: y_dates, reviews: y_reviews, ratings: y_ratings, url: y_url}
-
   end
 
   def self.scrape_zomato
+    z_name = @yelp_result.business.name.downcase
+
+    case
+    when z_name.include?('lounge')
+      z_name.slice! 'lounge'
+    when z_name.include?('restaurant')
+      z_name.slice! 'restaurant'
+    when z_name.include?('bar')
+      z_name.slice! 'bar'
+    when z_name.include?('grill')
+      z_name.slice! 'grill'
+    when z_name.include?('brasserie')
+      z_name.slice! 'brasserie'
+    when z_name.include?('bistro')
+      z_name.slice! 'bistro'
+    end
+
     z_city_id = 89 #Toronto
-    @z_restaurant = HTTParty.get('https://developers.zomato.com/api/v2.1/search?q=' + @yelp_result.business.name.downcase.gsub(' ','+') + '&count=1&lat=' + @yelp_result.business.location.coordinate.latitude.to_s + '&lon=' + @yelp_result.business.location.coordinate.longitude.to_s, :headers => {'user_key' => @@ZOMATO_KEY})["restaurants"][0]["restaurant"]
+    @z_restaurant = HTTParty.get('https://developers.zomato.com/api/v2.1/search?q=' + z_name.gsub(' ','+') + '&count=3&lat=' + @yelp_result.business.location.coordinate.latitude.to_s + '&lon=' + @yelp_result.business.location.coordinate.longitude.to_s, :headers => {'user_key' => @@ZOMATO_KEY})["restaurants"][0]["restaurant"]
     z_url = @z_restaurant["url"]
     z = HTTParty.get(z_url, :headers => {})
-    z_page = Nokogiri::HTML(z)
+    @z_page = Nokogiri::HTML(z)
 
-    z_content = z_page.css('div.rev-text')
+    z_content = @z_page.css('div.rev-text')
 
     if z_content.length == 0
       @no_zomato = true
     else
       @no_zomato = false
-      z_content = z_page.css('div.rev-text')
+      z_content = @z_page.css('div.rev-text')
       z_ratings = z_content.to_s.split("label=\"Rated ")[1..3].map{ |rating| rating[0..2]}
-      z_dates = z_page.xpath("//time").to_s.split("datetime=\"")[1..3].map { |date| Chronic.parse(date[0..9]).strftime('%b %d, %Y')}
+      z_dates = @z_page.xpath("//time").to_s.split("datetime=\"")[1..3].map { |date| Chronic.parse(date[0..9]).strftime('%b %d, %Y')}
 
       z_reviews = z_content.text.split("Rated")[1..3]
 
