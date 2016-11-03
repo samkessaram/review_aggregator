@@ -38,45 +38,20 @@ class ReviewsFinder
     end
 
     z_city_id = 89 #Toronto
+    # pry
     @z_restaurant = HTTParty.get('https://developers.zomato.com/api/v2.1/search?q=' + z_name.gsub(' ','+') + '&count=3&lat=' + @yelp_result.business.location.coordinate.latitude.to_s + '&lon=' + @yelp_result.business.location.coordinate.longitude.to_s, :headers => {'user_key' => @@ZOMATO_KEY})["restaurants"][0]["restaurant"]
     z_url = @z_restaurant["url"]
+    z_id = @z_restaurant["id"]
     z_dates = []
     z_reviews = []
     z_ratings = []
 
-    reviews = HTTParty.get('https://developers.zomato.com/api/v2.1/reviews?res_id=8909227&count=3', :headers => {'user_key' => @@ZOMATO_KEY})["user_reviews"]
+    reviews = HTTParty.get('https://developers.zomato.com/api/v2.1/reviews?res_id='+ @z_restaurant["id"] + '&count=3', :headers => {'user_key' => @@ZOMATO_KEY})["user_reviews"]
     reviews.each do |review|
       z_reviews.push(review["review"]["review_text"])
       z_dates.push(review["review"]["review_time_friendly"])
       z_ratings.push(review["review"]["rating"])
     end
-
-
-
-    # z = HTTParty.get(z_url, :headers => {})
-    # @z_page = Nokogiri::HTML(z)
-
-    # z_content = @z_page.css('div.rev-text')
-
-    # if z_content.length == 0
-    #   @no_zomato = true
-    # else
-    #   @no_zomato = false
-    #   z_content = @z_page.css('div.rev-text')
-    #   z_ratings = z_content.to_s.split("label=\"Rated ")[1..3].map{ |rating| rating[0..2]}
-    #   z_dates = @z_page.xpath("//time").to_s.split("datetime=\"")[1..3].map { |date| Chronic.parse(date[0..9]).strftime('%b %d, %Y')}
-
-    #   z_reviews = z_content.text.split("Rated")[1..3]
-    #   pry
-
-    #   z_ratings.map! do |rating|
-    #     if rating.include? '.0'
-    #       rating = rating.split('.0')[0]
-    #     else
-    #       rating
-    #     end
-    #   end
-    # end
 
     {dates: z_dates, reviews: z_reviews, ratings: z_ratings, url: z_url}
   end
@@ -132,20 +107,16 @@ class ReviewsFinder
   def self.scrape_bookenda
     b_url = 'https://www.bookenda.com/' + term
     b = HTTParty.get(b_url, :headers=> {})
-    b_page = Nokogiri::HTML(b)
+    @b_page = Nokogiri::HTML(b)
 
-    if b_page.css('div#containerReview div.row p').length == 0
-      no_reviews = true
-    else
-      no_reviews = false
-    end 
+    no_reviews = (@b_page.css('div#containerReview div.row p').length == 0 ? true : false ) 
 
-    not_found_error = b_page.text.include? "We're sorry, but the page you requested could not be found."
+    not_found_error = @b_page.text.include? "We're sorry, but the page you requested could not be found."
 
     if !not_found_error && !no_reviews
-      b_reviews = b_page.css('div#containerReview div.row p').to_s.split("itemprop=\"description\">")[1..3].map { |review| review.split("</p>")[0] }
-      b_ratings = b_page.css('div#containerReview div.row div.score meta').to_s.split("itemprop=\"ratingValue\" content=\"")[1..3].map { |rating| rating[0..3] }
-      b_dates = b_page.css('div#containerReview div.row small').to_s.split("content=\"")[1..3].map { |date| Chronic.parse(date[0..9]).strftime('%b %d, %Y') }
+      b_reviews = @b_page.css('div#containerReview div.row p').to_s.split("itemprop=\"description\">")[1..3].map { |review| review.split("</p>")[0] }
+      b_ratings = @b_page.css('div#containerReview div.row div.score meta').to_s.split("itemprop=\"ratingValue\" content=\"")[1..3].map { |rating| rating[0..3] }
+      b_dates = @b_page.css('div#containerReview div.row small').to_s.split("content=\"")[1..3].map { |date| Chronic.parse(date[0..9]).strftime('%b %d, %Y') }
     
       b_ratings.map! do |rating|
         if rating.include? '.00'
