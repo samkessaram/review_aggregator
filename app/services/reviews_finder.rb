@@ -92,9 +92,7 @@ class ReviewsFinder
       @o_dates = @o_page.css('#reviews-results div.review-meta > span').to_s.split("Dined")[1..3].map { |date| date.split("<")[0] }
 
       @o_dates.map! do |date|
-        if date.include? 'ago'
-          date = date.split(' ago')[0]
-        else 
+        if date.include? 'on'
           date = date.split('on ')[1]
         end
         Chronic.parse(date).strftime('%b %d, %Y')
@@ -106,7 +104,8 @@ class ReviewsFinder
 
   def self.scrape_bookenda
     b_url = 'https://www.bookenda.com/' + term
-    b = HTTParty.get(b_url, :headers=> {})
+    b = HTTParty.get(b_url, :headers=> {"USER_AGENT" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.80 Safari/537.36"
+})
     @b_page = Nokogiri::HTML(b)
 
     no_reviews = (@b_page.css('div#containerReview div.row p').length == 0 ? true : false ) 
