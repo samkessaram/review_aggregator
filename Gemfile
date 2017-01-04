@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.1.3'
+
 gem 'httparty'
 gem 'nokogiri'
 gem 'kaminari'
@@ -7,6 +9,7 @@ gem 'yelp', require: 'yelp'
 gem 'oauth', '~> 0.4.7'
 gem 'chronic'
 gem 'jquery-turbolinks'
+gem 'puma'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
