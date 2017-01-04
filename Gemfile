@@ -10,6 +10,7 @@ gem 'oauth', '~> 0.4.7'
 gem 'chronic'
 gem 'jquery-turbolinks'
 gem 'puma'
+gem 'rails_12factor', group: :production
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
