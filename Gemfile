@@ -4,11 +4,9 @@ ruby '2.1.3'
 
 gem 'httparty'
 gem 'nokogiri'
-gem 'kaminari'
 gem 'yelp', require: 'yelp'
-gem 'oauth', '~> 0.4.7'
 gem 'chronic'
-gem 'jquery-turbolinks'
+# gem 'jquery-turbolinks'
 gem 'puma'
 gem 'rails_12factor', group: :production
 

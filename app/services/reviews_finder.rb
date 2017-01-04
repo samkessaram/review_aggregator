@@ -6,8 +6,7 @@ class ReviewsFinder
     
     data = {
       :reviews => {
-        # :yelp => scrape_yelp,
-        :yelp => {dates: [1,2,3], reviews: [1,2,3], ratings: [1,2,3], url: 'y_url'},
+        :yelp => scrape_yelp,
         :zomato => scrape_zomato,
         :opentable => scrape_opentable,
         :bookenda => scrape_bookenda
