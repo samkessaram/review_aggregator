@@ -1,7 +1,7 @@
 class ReviewsFinder
 
   def self.find_reviews(yelp_response)
-
+    pry
     @yelp_result = Yelp.client.business(yelp_response.businesses[0].id)
     
     data = {
@@ -16,6 +16,7 @@ class ReviewsFinder
   end
 
   def self.scrape_yelp
+    pry
     y_url = @yelp_result.business.url + '?sort_by=date_desc'
     y_raw = HTTParty.get(y_url, :headers=> {})
     @y_parsed = Nokogiri::HTML(y_raw)
@@ -27,6 +28,7 @@ class ReviewsFinder
   end
 
   def self.scrape_zomato
+    pry
     z_name = @yelp_result.business.name.downcase
 
     generic_terms = ['lounge','restaurant','bar','grill','brasserie','bistro']
@@ -38,7 +40,7 @@ class ReviewsFinder
     end
 
     z_city_id = 89 #Toronto
-    # pry
+
     @z_restaurant = HTTParty.get('https://developers.zomato.com/api/v2.1/search?q=' + z_name.gsub(' ','+') + '&count=3&lat=' + @yelp_result.business.location.coordinate.latitude.to_s + '&lon=' + @yelp_result.business.location.coordinate.longitude.to_s, :headers => {'user_key' => @@ZOMATO_KEY})["restaurants"][0]["restaurant"]
     z_url = @z_restaurant["url"]
     z_id = @z_restaurant["id"]
