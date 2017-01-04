@@ -23,7 +23,7 @@ class ReviewsFinder
     # y_ratings = @y_parsed.css('div.review--with-sidebar div.review-content div.i-stars').to_s.split("title=\"")[1..3].map { |rating| rating.split(" star rating")[0].split('.0')[0] }
     @y_dates = @y_parsed.css('div.review-content span.rating-qualifier').to_s.split("qualifier\">\n")[1..3].map { |date| Chronic.parse(date[8..20]).strftime('%b %d, %Y')}
 
-    {dates: @y_dates, reviews: y_reviews, ratings: y_ratings, url: y_url}
+    {dates: @y_dates, reviews: y_reviews, ratings: ['y_ratings',2,3], url: y_url}
   end
 
   def self.scrape_zomato
