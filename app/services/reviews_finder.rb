@@ -20,7 +20,7 @@ class ReviewsFinder
     y_raw = HTTParty.get(y_url, :headers=> {})
     @y_parsed = Nokogiri::HTML(y_raw)
     y_reviews = @y_parsed.css('div.review-content p').to_s.split('</p>')[0..2].map { |review| review.split("ang=\"en\">")[1] }
-    y_ratings = @y_parsed.css('div.review--with-sidebar div.review-content div.i-stars').to_s.split("title=\"")[1..3].map { |rating| rating.split(" star rating")[0].split('.0')[0] }
+    # y_ratings = @y_parsed.css('div.review--with-sidebar div.review-content div.i-stars').to_s.split("title=\"")[1..3].map { |rating| rating.split(" star rating")[0].split('.0')[0] }
     @y_dates = @y_parsed.css('div.review-content span.rating-qualifier').to_s.split("qualifier\">\n")[1..3].map { |date| Chronic.parse(date[8..20]).strftime('%b %d, %Y')}
 
     {dates: @y_dates, reviews: y_reviews, ratings: y_ratings, url: y_url}
