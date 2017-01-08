@@ -19,7 +19,7 @@ class ReviewsFinder
 
   def self.scrape_yelp
     y_url = @yelp_result.business.url + '?sort_by=date_desc'
-    y_raw = HTTParty.get(y_url, :headers=> {})
+    y_raw = HTTParty.get(y_url, :headers=> {"User-Agent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95 Safari/537.36"})
     @y_parsed = Nokogiri::HTML(y_raw)
 
     # y_reviews = @y_parsed.css('div.review-content p').to_s.split('</p>')[0..2].map { |review| review.split("ang=\"en\">")[1] }
