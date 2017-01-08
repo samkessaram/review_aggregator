@@ -21,7 +21,6 @@ class ReviewsFinder
     y_url = @yelp_result.business.url + '?sort_by=date_desc'
     y_raw = HTTParty.get(y_url, :headers=> {})
     @y_parsed = Nokogiri::HTML(y_raw)
-    y_reviews = @y_parsed.css('body').to_s
 
     # y_reviews = @y_parsed.css('div.review-content p').to_s.split('</p>')[0..2].map { |review| review.split("ang=\"en\">")[1] }
     # y_ratings = @y_parsed.css('div.review--with-sidebar div.review-content div.i-stars').to_s.split("title=\"")[1..3].map { |rating| rating.split(" star rating")[0].split('.0')[0] }
