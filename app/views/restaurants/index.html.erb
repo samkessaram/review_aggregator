@@ -23,10 +23,12 @@
 
   <div id="front-logos">
     <p>With reviews from:</p>
-    <%= image_tag("yelp-invert.png", height: '40px', alt: 'yelp-logo') %>
-    <%= image_tag("opentable-invert.png", height: '40px', alt: 'opentable-logo') %>
-    <%= image_tag("zomato-invert.png", height: '50px', alt: 'zomato-logo') %>
-    <%= image_tag("bookenda-invert.png", height: '40px', alt: 'bookenda-logo') %>
+    <ul>
+      <li><%= image_tag("yelp-invert.png", height: '40px', alt: 'yelp-logo') %></li>
+      <li><%= image_tag("opentable-invert.png", height: '40px', alt: 'opentable-logo') %></li>
+      <li><%= image_tag("zomato-invert.png", height: '50px', alt: 'zomato-logo') %></li>
+      <li><%= image_tag("bookenda-invert.png", height: '40px', alt: 'bookenda-logo') %></li>
+    </ul>
   </div>
 
 <% if $error_message %>
