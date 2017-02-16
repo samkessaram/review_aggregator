@@ -133,14 +133,14 @@ class ReviewsFinder
   end
 
   def self.restaurant_info
-    if @no_zomato
-      name = @yelp_result.business.name
-    else
-      name = @z_restaurant["name"]
-    end
+    # if @no_zomato
+    #   name = @yelp_result.business.name
+    # else
+    #   name = @z_restaurant["name"]
+    # end
     address = [@yelp_result.business.location.display_address[0], @yelp_result.business.location.display_address[1], @yelp_result.business.location.display_address[2]]
 
-    {name: name, address: address}
+    {name: @yelp_result.business.name, address: address}
   end
 
 end
