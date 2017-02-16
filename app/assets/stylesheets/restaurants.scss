@@ -1,89 +1,17 @@
 body {
-  margin: 0px;
-  min-height: 500px
+  margin: 0;
+  min-height: 500px;
 }
 
 li {
-  list-style: none;
   display: inline-block;
-}
-
-#sidebar {
-  float: left;
-  height: 100%;
-  background: black;
-  position: fixed;
-  padding: 35px;
-  text-align: center;
-  color: #666666;
+  list-style: none;
 }
 
 #back {
-  margin-bottom: 40px;
   color: #1EAEDB;
   font-size: 2rem;
-}
-
-#error-message {
-  position: absolute;
-  z-index: 12;
-  top: 220px;
-  background-color: rgba(255,0,0,0.6);
-  padding: 15px;
-  border-radius: 5px;
-  color: black;
-}
-
-#loading {
-  width:100%;
-  text-align: center;
-  display: none;
-}
-
-#spacer {
-  width: 100%;
-  height: 200px;
-  margin-top: 100px;
-}
-
-#error-message h3 {
-  margin-bottom: 0px;
-  font-family: helveticaneue;
-}
-
-#hello {
-  clear:both;
-  position: relative;
-  top: 40px;
-}
-
-#front-logos img {
-  margin-right: 25px;
-}
-
-#title {
-  font-weight: 700;
-  font-family: HelveticaNeue;
-  font-size: 900%;
-  float: left;
-  color: #1EAEDB;
-  margin-top: 30px;
   margin-bottom: 40px;
-}
-
-#blurb {
-  font-weight: 700;
-  color: #1EAEDB;
-  clear:both;
-}
-
-#banner {
-  height: 350px;
-  width: 100%;
-  z-index: -1;
-  position: absolute;
-  overflow: hidden;
-  background-image: image-url('banner1.jpg');
 }
 
 #banner img {
@@ -91,76 +19,76 @@ li {
   -webkit-filter: grayscale(100%);
 }
 
-.container {
-  text-align: center;
+#banner {
+  background-image: image-url('banner1.jpg');
+  height: 350px;
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+  z-index: -1;
 }
 
-#term {
-  width: 300px;
+#blurb {
+  clear: both;
+  color: #1EAEDB;
+  font-weight: 700;
 }
 
-#search {
-  display: inline-block;
+#error-message h3 {
+  font-family: 'Helvetica Neue','Helvetica','Arial', sans-serif;
+  margin-bottom: 0;
 }
 
-#restaurant {
-  width: 300px;
+#error-message {
+  background-color: rgba(255,0,0,0.6);
+  border-radius: 5px;
+  color: black;
+  padding: 15px;
+  position: absolute;
+  top: 220px;
+  z-index: 12;
+}
+
+#front-logos img {
+  margin-right: 25px;
 }
 
 #front-logos {
   width: 100%;
 }
 
-#scroll-links h6 {
-  margin-top: 20px;
+#hello {
+  clear: both;
+  position: relative;
+  top: 40px;
 }
 
-#results {
-  display: inline-block;
-}
-
-.show-text {
-  cursor: pointer;
-}
-
-.full-text {
-    display: none;
-}
-
-.show {
-  display:block;
-}
-
-.morecontent span {
-    display: none;
-}
-
-.morelink {
-    display: block;
-    text-align: center;
-}
-
-.more {
-  text-align: left;
-  clear:both;
-}
-
-#logos {
-  display: inline-block;
+#loading {
+  display: none;
   text-align: center;
-  margin-top: 30px;
-  width: 200px;
+  width: 100%;
 }
 
 #logos img {
   cursor: pointer;
-  margin-bottom: 40px;
   display: inline-block;
+  margin-bottom: 40px;
 }
 
-#restaurant-info {
-  margin-bottom: 60px;
+#logos {
+  display: inline-block;
+  margin-top: 30px;
   text-align: center;
+  width: 200px;
+}
+
+#restaurant {
+  width: 300px;
+}
+
+#restaurant-info div {
+  display: inline-block;
+  text-align: left;
 }
 
 #restaurant-info h1 {
@@ -172,62 +100,132 @@ li {
   margin-bottom: -10px;
 }
 
-#restaurant-info div {
-  text-align: left;
+#restaurant-info {
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+#results {
   display: inline-block;
 }
 
 #reviews {
   float: right;
-  padding-right: 5%;
   margin-top: 50px;
+  padding-right: 5%;
 }
 
-.review {
+#scroll-links h6 {
+  margin-top: 20px;
+}
+
+#search {
+  display: inline-block;
+}
+
+#sidebar {
+  background: black;
+  color: #666666;
+  float: left;
+  height: 100%;
+  padding: 35px;
+  position: fixed;
   text-align: center;
 }
 
-.review img {
-  display: inline-block;
+#spacer {
+  height: 200px;
+  margin-top: 100px;
+  width: 100%;
+}
+
+#term {
+  width: 300px;
+}
+
+#title {
+  color: #1EAEDB;
+  float: left;
+  font-weight: 700;
+  font-family: 'Helvetica Neue','Helvetica','Arial', sans-serif;
+  font-size: 900%;
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+
+.container {
+  text-align: center;
 }
 
 .date {
   float: left;
 }
 
+.full-text {
+  display: none;
+}
+
+.more {
+  clear: both;
+  text-align: left;
+}
+
+.morecontent span {
+  display: none;
+}
+
+.morelink {
+  display: block;
+  text-align: center;
+}
+
 .rating {
   float: right;
 }
 
-@media (max-width: 720px) {
+.review img {
+  display: inline-block;
+}
+
+.review {
+  text-align: center;
+}
+
+.show {
+  display: block;
+}
+
+.show-text {
+  cursor: pointer;
+}
+
+@media(max-width: 720px) {
   li {
     display: list-item;
+  }
+  
+  #restaurant-info {
+    margin-bottom: auto;
+  }
+  
+  #reviews {
+    padding-left: 5%;
+  }
+  
+  #search {
+    margin-top: 50px;
   }
   
   #sidebar {
     position: static;
   }
-
-  #reviews {
-    padding-left: 5%;
-  }
-
-  #title {
-    margin-top: 0;
-  }
-
+  
   #spacer {
     height: auto;
     margin-top: -20px;
   }
-
-  #search {
-    margin-top: 50px;
-  }
-
-  #restaurant-info {
-    margin-bottom: auto;
+  
+  #title {
+    margin-top: 0;
   }
 }
-
-
