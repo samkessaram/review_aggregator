@@ -13,14 +13,21 @@ class RestaurantsController < ApplicationController
 
   def reviews
     $error = nil
+
+    # Limit search to Toronto
     city = "Toronto"
+
+    # Use Yelp API to check if restaurant exists
     yelp_response = Yelp.client.search( city, { term: params[:restaurant], category_filter: "restaurants,bars,cafes", limit: 5 })
+
     if yelp_response.total == 0
       $error = true
       redirect_to '/'
     else
+      # Use service to scrape data
       @data = ReviewsFinder.find_reviews(yelp_response)
     end
+
   end
 
   def contact
@@ -35,33 +42,19 @@ class RestaurantsController < ApplicationController
   end
 
   def edit
-    # @yelp_restaurant = Restaurant.find(params[:id])
+
   end
 
   def create
-    # @restaurant = Restaurant.new(restaurant_params)
 
-    # if @restaurant.save
-    #   redirect_to restaurants_path
-    # else
-    #   render :new
-    # end
   end
 
   def update
-    # @restaurant = Restaurant.find(params[:id])
-
-    # if @restaurant.update_attributes(restaurant_params)
-    #   redirect_to restaurant_path(@restaurant)
-    # else
-    #   render :edit
-    # end
+]
   end
 
   def destroy
-    # @restaurant = Restaurant.find(restaurant[:id])
-    # @restaurant.destroy
-    # redirect_to restaurants_path
+
   end
 
   protected
